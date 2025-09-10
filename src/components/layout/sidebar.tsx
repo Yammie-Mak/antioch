@@ -1,6 +1,6 @@
-"use client"
+'use client'
 
-import { motion } from "framer-motion"
+import { motion } from 'framer-motion'
 import {
   LayoutDashboard,
   CheckSquare,
@@ -12,22 +12,22 @@ import {
   Settings,
   ChevronLeft,
   ChevronRight,
-} from "lucide-react"
-import Link from "next/link"
-import { usePathname } from "next/navigation"
-import { cn } from "@/lib/utils"
-import { useStore } from "@/lib/store"
-import { Button } from "@/components/ui/button"
+} from 'lucide-react'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import { cn } from '@/lib/utils'
+import { useStore } from '@/lib/store'
+import { Button } from '@/components/ui/button'
 
 const navigation = [
-  { name: "Dashboard", href: "/task-manager/dashboard", icon: LayoutDashboard },
-  { name: "Task CRUD", href: "/task-manager/tasks", icon: CheckSquare },
-  { name: "Assignments", href: "/task-manager/assignments", icon: Users },
-  { name: "Recurring Tasks", href: "/task-manager/recurring", icon: RotateCcw },
-  { name: "Check-in", href: "/task-manager/checkin", icon: LogIn },
-  { name: "Check-out", href: "/task-manager/checkout", icon: LogOut },
-  { name: "Long Term Tasks", href: "/task-manager/long-term", icon: Calendar },
-  { name: "Settings", href: "/task-manager/settings", icon: Settings },
+  { name: 'Dashboard', href: '/fellowship1/task-manager/dashboard', icon: LayoutDashboard },
+  { name: 'Task CRUD', href: '/fellowship1/task-manager/tasks', icon: CheckSquare },
+  { name: 'Assignments', href: '/fellowship1/task-manager/assignments', icon: Users },
+  { name: 'Recurring Tasks', href: '/fellowship1/task-manager/recurring', icon: RotateCcw },
+  { name: 'Check-in', href: '/fellowship1/task-manager/checkin', icon: LogIn },
+  { name: 'Check-out', href: '/fellowship1/task-manager/checkout', icon: LogOut },
+  { name: 'Long Term Tasks', href: '/fellowship1/task-manager/long-term', icon: Calendar },
+  { name: 'Settings', href: '/fellowship1/task-manager/settings', icon: Settings },
 ]
 
 export function Sidebar() {
@@ -38,7 +38,7 @@ export function Sidebar() {
     <motion.div
       initial={false}
       animate={{ width: sidebarOpen ? 280 : 80 }}
-      transition={{ duration: 0.3, ease: "easeInOut" }}
+      transition={{ duration: 0.3, ease: 'easeInOut' }}
       className="relative flex flex-col bg-gray-900 border-r border-gray-800 h-full flex-shrink-0"
     >
       {/* Toggle Button */}
@@ -80,8 +80,8 @@ export function Sidebar() {
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 className={cn(
-                  "flex items-center px-3 py-2 rounded-lg text-sm font-medium transition-colors",
-                  isActive ? "bg-blue-600 text-white" : "text-gray-300 hover:bg-gray-800 hover:text-white",
+                  'flex items-center px-3 py-2 rounded-lg text-sm font-medium transition-colors',
+                  isActive ? 'bg-blue-600 text-white' : 'text-gray-300 hover:bg-gray-800 hover:text-white',
                 )}
               >
                 <item.icon className="w-5 h-5 flex-shrink-0" />
