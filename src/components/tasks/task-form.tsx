@@ -1,43 +1,43 @@
-"use client"
+'use client'
 
-import type React from "react"
+import type React from 'react'
 
-import { useState } from "react"
-import { motion } from "framer-motion"
-import { Plus, X } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Label } from "@/components/ui/label"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
-import { Badge } from "@/components/ui/badge"
-import { useStore } from "@/lib/store"
-import { useToast } from "@/hooks/use-toast"
+import { useState } from 'react'
+import { motion } from 'framer-motion'
+import { Plus, X } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Textarea } from '@/components/ui/textarea'
+import { Label } from '@/components/ui/label'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
+import { Badge } from '@/components/ui/badge'
+import { useStore } from '@/lib/store'
+import { useToast } from '@/hooks/use-toast'
 
 interface TaskFormProps {
   trigger?: React.ReactNode
   onSuccess?: () => void
 }
 
-type TaskStatus = 'not_started' | 'in_progress' | 'completed' | 'blocked';
-type TaskPriority = 'low' | 'medium' | 'high' | 'urgent';
-type TaskCategory = 'general' | 'assignment' | 'recurring' | 'long_term';
+type TaskStatus = 'not_started' | 'in_progress' | 'completed' | 'blocked'
+type TaskPriority = 'low' | 'medium' | 'high' | 'urgent'
+type TaskCategory = 'general' | 'assignment' | 'recurring' | 'long_term'
 
 export function TaskForm({ trigger, onSuccess }: TaskFormProps) {
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)
-  const [tagInput, setTagInput] = useState("")
+  const [tagInput, setTagInput] = useState('')
   const { user, addTask } = useStore()
   const { toast } = useToast()
 
   const [formData, setFormData] = useState({
-    title: "",
-    description: "",
-    status: "not_started" as TaskStatus,
-    priority: "medium" as TaskPriority,
-    category: "general" as TaskCategory,
-    due_date: "",
+    title: '',
+    description: '',
+    status: 'not_started' as TaskStatus,
+    priority: 'medium' as TaskPriority,
+    category: 'general' as TaskCategory,
+    due_date: '',
     tags: [] as string[],
   })
 
@@ -56,7 +56,7 @@ export function TaskForm({ trigger, onSuccess }: TaskFormProps) {
         id: `task-${Date.now()}`,
         ...formData,
         created_by: user.id,
-        team_id: "mock-team-id",
+        team_id: 'mock-team-id',
         due_date: formData.due_date || null,
         created_at: new Date().toISOString(),
         updated_at: new Date().toISOString(),
@@ -69,28 +69,29 @@ export function TaskForm({ trigger, onSuccess }: TaskFormProps) {
 
       addTask(newTask)
       toast({
-        title: "Task created successfully!",
+        title: 'Task created successfully!',
         description: `"${formData.title}" has been added to your tasks.`,
       })
 
       // Reset form
       setFormData({
-        title: "",
-        description: "",
-        status: "not_started",
-        priority: "medium",
-        category: "general",
-        due_date: "",
+        title: '',
+        description: '',
+        status: 'not_started',
+        priority: 'medium',
+        category: 'general',
+        due_date: '',
         tags: [],
       })
-      setTagInput("")
+      setTagInput('')
       setOpen(false)
       onSuccess?.()
     } catch (e) {
+      console.log(e)
       toast({
-        title: "Error creating task",
-        description: "Something went wrong. Please try again.",
-        variant: "destructive",
+        title: 'Error creating task',
+        description: 'Something went wrong. Please try again.',
+        variant: 'destructive',
       })
     } finally {
       setLoading(false)
@@ -103,7 +104,7 @@ export function TaskForm({ trigger, onSuccess }: TaskFormProps) {
         ...prev,
         tags: [...prev.tags, tagInput.trim()],
       }))
-      setTagInput("")
+      setTagInput('')
     }
   }
 
@@ -240,7 +241,7 @@ export function TaskForm({ trigger, onSuccess }: TaskFormProps) {
               <Input
                 value={tagInput}
                 onChange={(e) => setTagInput(e.target.value)}
-                onKeyPress={(e) => e.key === "Enter" && (e.preventDefault(), addTag())}
+                onKeyPress={(e) => e.key === 'Enter' && (e.preventDefault(), addTag())}
                 className="bg-gray-800 border-gray-700 flex-1"
                 placeholder="Add a tag..."
               />
@@ -274,7 +275,7 @@ export function TaskForm({ trigger, onSuccess }: TaskFormProps) {
               Cancel
             </Button>
             <Button type="submit" disabled={loading || !formData.title.trim()}>
-              {loading ? "Creating..." : "Create Task"}
+              {loading ? 'Creating...' : 'Create Task'}
             </Button>
           </div>
         </motion.form>
