@@ -1,27 +1,24 @@
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import PrayerLayout from "@/components/prayer-layout"
-import { mockPrayerRequests, mockPrayerMeetings, mockPrayerAssignments } from "@/lib/mock-data"
-import { Heart, Calendar, Users, Building, Plus, Sparkles, Star } from "lucide-react"
+import Link from 'next/link'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Badge } from '@/components/ui/badge'
+import PrayerLayout from '@/components/prayer-layout'
+import { mockPrayerRequests, mockPrayerMeetings, mockPrayerAssignments } from '@/lib/mock-data'
+import { Heart, Calendar, Users, Building, Plus, Sparkles, Star } from 'lucide-react'
 
 interface PrayerHomeProps {
-  params: {
-    fellowship: string
-  }
+  fellowship: string
 }
 
-export default function PrayerHome({ params }: PrayerHomeProps) {
-  
-  const fellowship = params?.fellowship || 'default-fellowship';
+export default async function PrayerHome(params: Promise<PrayerHomeProps>) {
+  const fellowship = (await params)?.fellowship || 'default-fellowship'
 
   // Calculate stats
   const totalRequests = mockPrayerRequests.length
-  const activeRequests = mockPrayerRequests.filter((r) => r.status === "Pending" || r.status === "In Progress").length
-  const answeredRequests = mockPrayerRequests.filter((r) => r.status === "Completed").length
+  const activeRequests = mockPrayerRequests.filter((r) => r.status === 'Pending' || r.status === 'In Progress').length
+  const answeredRequests = mockPrayerRequests.filter((r) => r.status === 'Completed').length
   const upcomingMeetings = mockPrayerMeetings.filter((m) => new Date(m.date) >= new Date()).length
-  const pendingAssignments = mockPrayerAssignments.filter((a) => a.status === "Pending").length
+  const pendingAssignments = mockPrayerAssignments.filter((a) => a.status === 'Pending').length
 
   return (
     <PrayerLayout fellowshipName={fellowship}>
@@ -113,7 +110,7 @@ export default function PrayerHome({ params }: PrayerHomeProps) {
             </Card>
           </Link>
 
-          <Link href={"/fellowship1/Prayer-system/prayer/meetings"}>
+          <Link href={'/fellowship1/Prayer-system/prayer/meetings'}>
             <Card className="prayer-card-glow cursor-pointer group bg-gradient-to-br from-green-50 via-white to-green-50 border-green-200">
               <CardHeader className="text-center pb-4">
                 <div className="mx-auto mb-4 p-4 bg-green-100 rounded-full w-fit group-hover:bg-green-200 transition-colors">
@@ -131,7 +128,7 @@ export default function PrayerHome({ params }: PrayerHomeProps) {
             </Card>
           </Link>
 
-          <Link href={"/fellowship1/Prayer-system/prayer/assignments"}>
+          <Link href={'/fellowship1/Prayer-system/prayer/assignments'}>
             <Card className="prayer-card-glow cursor-pointer group bg-gradient-to-br from-blue-50 via-white to-blue-50 border-blue-200">
               <CardHeader className="text-center pb-4">
                 <div className="mx-auto mb-4 p-4 bg-blue-100 rounded-full w-fit group-hover:bg-blue-200 transition-colors">
@@ -151,7 +148,7 @@ export default function PrayerHome({ params }: PrayerHomeProps) {
             </Card>
           </Link>
 
-          <Link href={"/fellowship1/Prayer-system/prayer/ministries"}>
+          <Link href={'/fellowship1/Prayer-system/prayer/ministries'}>
             <Card className="prayer-card-glow cursor-pointer group bg-gradient-to-br from-orange-50 via-white to-orange-50 border-orange-200">
               <CardHeader className="text-center pb-4">
                 <div className="mx-auto mb-4 p-4 bg-orange-100 rounded-full w-fit group-hover:bg-orange-200 transition-colors">
